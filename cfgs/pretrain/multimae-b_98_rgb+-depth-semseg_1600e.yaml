@@ -1,6 +1,6 @@
 # Input and output tasks
-in_domains: rgb-depth-semseg
-out_domains: rgb-depth-semseg
+in_domains: s2
+out_domains: s2
 standardize_depth: True
 extra_norm_pix_loss: True
 
