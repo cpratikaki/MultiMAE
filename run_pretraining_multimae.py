@@ -514,8 +514,10 @@ def train_one_epoch(model: torch.nn.Module, data_loader: Iterable, tasks_loss_fn
             )
 
             if extra_norm_pix_loss:
-                tasks_dict['norm_rgb'] = tasks_dict['rgb']
-                masks['norm_rgb'] = masks.get('rgb', None)
+                # tasks_dict['norm_rgb'] = tasks_dict['rgb']
+                # masks['norm_rgb'] = masks.get('rgb', None)
+                tasks_dict['norm_rgb'] = tasks_dict['s2']
+                masks['norm_rgb'] = masks.get('s2', None)
 
             task_losses = {}
             for task in preds:
