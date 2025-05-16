@@ -95,7 +95,7 @@ class DataAugmentationForMultiMAE(object):
             if task in ['depth']:
                 img = torch.Tensor(np.array(task_dict[task]) / 2 ** 16)
                 img = img.unsqueeze(0)  # 1 x H x W
-            elif task in ['rgb']:
+            elif task in ['rgb','s2']:
                 img = TF.to_tensor(task_dict[task])
                 img = TF.normalize(img, mean=self.rgb_mean, std=self.rgb_std)
             elif task in ['semseg', 'semseg_coco']:
