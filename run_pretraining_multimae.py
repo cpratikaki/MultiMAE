@@ -61,6 +61,13 @@ DOMAIN_CONF = {
         'output_adapter': partial(SpatialOutputAdapter, num_channels=3),
         'loss': MaskedMSELoss,
     },
+    'b1': {
+        'channels': 1,
+        'stride_level': 1,
+        'input_adapter': partial(PatchedInputAdapter, num_channels=1),
+        'output_adapter': partial(SpatialOutputAdapter, num_channels=1),
+        'loss': MaskedL1Loss,
+    },
     'depth': {
         'channels': 1,
         'stride_level': 1,
