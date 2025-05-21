@@ -1,6 +1,6 @@
 # Input and output tasks
-in_domains: b1
-out_domains: b1
+in_domains: b1,b2,b3
+out_domains: b1,b2,b3
 standardize_depth: True
 extra_norm_pix_loss: True
 

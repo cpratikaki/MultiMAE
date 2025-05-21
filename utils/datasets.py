@@ -92,7 +92,7 @@ class DataAugmentationForMultiMAE(object):
                 
         # Convert to Tensor
         for task in task_dict:
-            if task in ['depth','b1']:
+            if task in ['depth','b1','b2','b3']:
                 img = torch.Tensor(np.array(task_dict[task]) / 2 ** 16)
                 img = img.unsqueeze(0)  # 1 x H x W
             elif task in ['rgb','s2']:
