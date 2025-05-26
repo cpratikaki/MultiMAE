@@ -383,6 +383,10 @@ class MultiMAE(nn.Module):
                     ids_keep=ids_keep,
                     ids_restore=ids_restore,
                 )
+        print("\nOutput predictions:")
+        for domain, output in preds.items():
+            print(f"  Task: {domain}, Output shape: {output.shape}")
+
         
         return preds, task_masks
 
