@@ -296,9 +296,9 @@ class MultiMAE(nn.Module):
         ## Processing input modalities
         # If input x is a Tensor, assume it's RGB
         x = {'rgb': x} if isinstance(x, torch.Tensor) else x
-        print(f"Input tensors:")
-        for k, v in x.items():
-            print(f"  {k}: {v.shape}")
+        # print(f"Input tensors:")
+        # for k, v in x.items():
+        #     print(f"  {k}: {v.shape}")
 
         # Need image size for tokens->image reconstruction
         # We assume that at least one of rgb or semseg is given as input before masking
@@ -316,9 +316,9 @@ class MultiMAE(nn.Module):
             for domain, tensor in x.items()
             if domain in self.input_adapters
         }
-        print(f"\nAfter input adapters (task tokens):")
-        for domain, tokens in input_task_tokens.items():
-            print(f"  {domain}: {tokens.shape}")
+        # print(f"\nAfter input adapters (task tokens):")
+        # for domain, tokens in input_task_tokens.items():
+        #     print(f"  {domain}: {tokens.shape}")
 
         input_info = self.generate_input_info(input_task_tokens=input_task_tokens, image_size=(H, W))
 
@@ -343,19 +343,19 @@ class MultiMAE(nn.Module):
             ids_keep = ids_shuffle[:, :(mask_all == 0).sum()]
 
         input_tokens = torch.cat([task_tokens for task_tokens in input_task_tokens.values()], dim=1)
-        print(f"\nConcatenated input tokens (before masking): {input_tokens.shape}")
+        # print(f"\nConcatenated input tokens (before masking): {input_tokens.shape}")
         
         input_tokens = torch.gather(input_tokens, dim=1, index=ids_keep.unsqueeze(-1).repeat(1, 1, input_tokens.shape[2]))
-        print(f"Input tokens (after masking): {input_tokens.shape}")
+        # print(f"Input tokens (after masking): {input_tokens.shape}")
 
         global_tokens = repeat(self.global_tokens, '() n d -> b n d', b=B)
-        print(f"Global tokens: {global_tokens.shape}")
+        # print(f"Global tokens: {global_tokens.shape}")
         
         input_tokens = torch.cat([input_tokens, global_tokens], dim=1)
-        print(f"Final tokens input to transformer: {input_tokens.shape}")
+        # print(f"Final tokens input to transformer: {input_tokens.shape}")
 
         encoder_tokens = self.encoder(input_tokens)
-        print(f"\nOutput of transformer encoder: {encoder_tokens.shape}")
+        # print(f"\nOutput of transformer encoder: {encoder_tokens.shape}")
 
         ## Output decoders
         if self.output_adapters is None:
@@ -383,9 +383,9 @@ class MultiMAE(nn.Module):
                     ids_keep=ids_keep,
                     ids_restore=ids_restore,
                 )
-        print("\nOutput predictions:")
-        for domain, output in preds.items():
-            print(f"  Task: {domain}, Output shape: {output.shape}")
+        # print("\nOutput predictions:")
+        # for domain, output in preds.items():
+        #     print(f"  Task: {domain}, Output shape: {output.shape}")
 
         
         return preds, task_masks
