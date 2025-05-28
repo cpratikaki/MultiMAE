@@ -97,7 +97,7 @@ class DataAugmentationForMultiMAE(object):
                 img = img.unsqueeze(0)
                 img = TF.normalize(img, mean=[0.5], std=[0.5])
                   # 1 x H x W
-                print(img.shape)
+                # print(img.shape)
             # elif task in ['depth']:
             #     img = TF.to_tensor(task_dict[task])  # shape: [1, H, W]
             #     img = TF.normalize(img, mean=[0.5], std=[0.5])  # or whatever is appropriate
